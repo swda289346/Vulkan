@@ -68,6 +68,7 @@ private:
 	// Called if the window is resized and some resources have to be recreatesd
 	void windowResize();
 	void handleMouseMove(int32_t x, int32_t y);
+	bool renderPresentPipeline = false;
 protected:
 	// Frame counter to display fps
 	uint32_t frameCounter = 0;

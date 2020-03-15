@@ -648,7 +648,8 @@ void VulkanExampleBase::submitFrame()
 			VK_CHECK_RESULT(result);
 		}
 	}
-	VK_CHECK_RESULT(vkQueueWaitIdle(queue));
+	if (!renderPresentPipeline)
+		VK_CHECK_RESULT(vkQueueWaitIdle(queue));
 }
 
 VulkanExampleBase::VulkanExampleBase(bool enableValidation)
@@ -734,6 +735,9 @@ VulkanExampleBase::VulkanExampleBase(bool enableValidation)
 		if ((args[i] == std::string("-bt")) || (args[i] == std::string("--benchframetimes"))) {
 			benchmark.outputFrameTimes = true;
 		}
+
+		if ((args[i] == std::string("-p")) || (args[i] == std::string("--pipeline")))
+			renderPresentPipeline = true;
 	}
 	
 #if defined(VK_USE_PLATFORM_ANDROID_KHR)
